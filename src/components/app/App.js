@@ -12,12 +12,13 @@ import {
 	deleteContact,
 } from '../contactList/contactsSlice';
 
+import app from './App.module.css';
+
 const App = () => {
 	const { filter, items } = useSelector(state => state.contacts);
 	const dispatch = useDispatch();
 
 	const onFilter = e => {
-		console.log(e.target.value);
 		dispatch(setFilter(e.target.value));
 	};
 
@@ -61,9 +62,9 @@ const App = () => {
 
 	return (
 		<div>
-			<h1 className="title">Phonebook</h1>
+			<h1 className={app.title}>Phonebook</h1>
 			<ContactForm onAddContact={onAddContact} />
-			<h2 className="title">Contacts</h2>
+			<h2 className={app.title}>Contacts</h2>
 			<Filter onFilter={onFilter} />
 			<ContactList
 				filteredContacts={filteredContacts}
