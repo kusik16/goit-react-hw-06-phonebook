@@ -22,7 +22,8 @@ const App = () => {
 		dispatch(setFilter(e.target.value));
 	};
 
-	const onAddContact = (name, number) => {
+	const onAddContact = (e, name, number) => {
+		e.preventDefault();
 		if (items.filter(contact => contact.name === name).length >= 1) {
 			alert(`${name} is already in contacts`);
 			return;
@@ -49,15 +50,11 @@ const App = () => {
 	const filteredContacts = useMemo(() => {
 		const filteredContacts = items.slice();
 
-		if (!filter) {
-			return filteredContacts;
-		} else {
-			return filteredContacts.filter(
-				contact =>
-					contact.name.toLowerCase().includes(filter.toLowerCase()) ||
-					(contact.number + '').includes(filter)
-			);
-		}
+		return filteredContacts.filter(
+			contact =>
+				contact.name.toLowerCase().includes(filter.toLowerCase()) ||
+				(contact.number + '').includes(filter)
+		);
 	}, [items, filter]);
 
 	return (
